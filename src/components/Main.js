@@ -9,7 +9,7 @@ class Main extends Component {
     results: []
   };
 
-  // When this component mounts, search the Giphy API for pictures of kittens
+  // When this component mounts, search the Random User API for employees
   componentDidMount() {
     this.searchEmployees();
   }
@@ -32,7 +32,7 @@ class Main extends Component {
   // When the form is submitted, search the Giphy API for `this.state.search`
   handleFormSubmit = event => {
     event.preventDefault();
-    this.searchEmployees(this.state.search);
+    console.log(this.state.results);
   };
 
   render() {
