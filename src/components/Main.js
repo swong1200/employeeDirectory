@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SearchForm from "./SearchForm";
+import TableHeader from "./TableHeader";
 import Results from "./Results";
 import API from "../utils/API";
 
@@ -43,6 +44,7 @@ class Main extends Component {
           handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
         />
+        <TableHeader />
         <Results results={this.state.results} />
       </div>
     );
