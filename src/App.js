@@ -1,18 +1,14 @@
-import './App.css';
+import "./App.css";
 import Wrapper from "./components/Wrapper";
-import API from "./utils/API";
-import Header from "./components/Header"
-
-function getEmployees() {
-  API.getEmployees().then(res => console.log(res.data.results)).catch(err => console.log(err));
-}
-getEmployees()
+import Header from "./components/Header";
+import SearchForm from "./components/SearchForm";
 
 function App() {
   return (
     <div className="App">
       <Wrapper>
         <Header />
+        <SearchForm />
       </Wrapper>
     </div>
   );
