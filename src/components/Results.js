@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/Results.css";
 
 function formatDate(date) {
   const dateArray = date.split("-");

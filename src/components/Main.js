@@ -38,9 +38,7 @@ class Main extends Component {
       },
       () => {
         let directory = this.state.results;
-        // console.log(directory)
         let searched = this.state.search.trim().toLowerCase();
-        // console.log(searched)
         if (searched === "") {
           this.setState({
             newResults: this.state.results,
@@ -62,9 +60,9 @@ class Main extends Component {
   // When the button is clicked, alphabetize the names
   handleSort = (event) => {
     event.preventDefault();
-    console.log(event);
     let directory = this.state.results;
     if (this.state.order === "descend") {
+        // eslint-disable-next-line
       let sortedList = directory.sort((a, b) => {
         if (a.name.last < b.name.last) return -1;
       });
@@ -73,6 +71,7 @@ class Main extends Component {
         order: "ascend",
       });
     } else if (this.state.order === "ascend") {
+        // eslint-disable-next-line
       let sortedList = directory.sort((a, b) => {
         if (a.name.last > b.name.last) return -1;
       });
