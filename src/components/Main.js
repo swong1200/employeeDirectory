@@ -7,7 +7,8 @@ import API from "../utils/API";
 class Main extends Component {
   state = {
     search: "",
-    results: []
+    results: [],
+    newResults: []
   };
 
   // When this component mounts, search the Random User API for employees
@@ -18,7 +19,7 @@ class Main extends Component {
   searchEmployees = query => {
     API.search(query)
         // .then(res => console.log(res.data.results))
-      .then(res => this.setState({ results: res.data.results }))
+      .then(res => this.setState({ results: res.data.results, newResults: res.data.results }))
       .catch(err => console.log(err));
   };
 
@@ -28,12 +29,23 @@ class Main extends Component {
     this.setState({
       [name]: value
     });
+    let directory = this.state.results;
+    console.log(directory)
+    let searched = String(this.state.search.trim().toLowerCase());
+    console.log(searched)
+    let newList = directory.filter((employee) => {
+        let firstName = employee.name.first.toLowerCase();
+        return firstName === searched;
+    })
+    this.setState({
+        newResults: newList
+    })
   };
 
-  // When the form is submitted, search the Giphy API for `this.state.search`
-  handleFormSubmit = event => {
+  // When the arrow is clicked, alphabetize the names
+  handleSort = event => {
     event.preventDefault();
-    console.log(this.state.results);
+    
   };
 
   render() {
@@ -41,11 +53,10 @@ class Main extends Component {
       <div>
         <SearchForm
           search={this.state.search}
-          handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
         />
-        <TableHeader />
-        <Results results={this.state.results} />
+        <TableHeader handleSort={this.handleSort}/>
+        <Results results={this.state.newResults} />
       </div>
     );
   }
