@@ -32,27 +32,31 @@ class Main extends Component {
   handleInputChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    this.setState({
-      [name]: value,
-    });
-    let directory = this.state.results;
-    // console.log(directory)
-    let searched = this.state.search.trim().toLowerCase();
-    // console.log(searched)
-    if (searched === "") {
-      this.setState({
-        newResults: this.state.results,
-      });
-    } else {
-      let newList = directory.filter((employee) => {
-        let firstName = employee.name.first.toLowerCase();
-        let lastName = employee.name.last.toLowerCase();
-        return firstName === searched || lastName === searched;
-      });
-      this.setState({
-        newResults: newList,
-      });
-    }
+    this.setState(
+      {
+        [name]: value,
+      },
+      () => {
+        let directory = this.state.results;
+        // console.log(directory)
+        let searched = this.state.search.trim().toLowerCase();
+        // console.log(searched)
+        if (searched === "") {
+          this.setState({
+            newResults: this.state.results,
+          });
+        } else {
+          let newList = directory.filter((employee) => {
+            let firstName = employee.name.first.toLowerCase();
+            let lastName = employee.name.last.toLowerCase();
+            return firstName === searched || lastName === searched;
+          });
+          this.setState({
+            newResults: newList,
+          });
+        }
+      }
+    );
   };
 
   // When the button is clicked, alphabetize the names
