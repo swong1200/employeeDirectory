@@ -37,16 +37,22 @@ class Main extends Component {
     });
     let directory = this.state.results;
     // console.log(directory)
-    let searched = String(this.state.search.trim().toLowerCase());
+    let searched = this.state.search.trim().toLowerCase();
     // console.log(searched)
-    let newList = directory.filter((employee) => {
-      let firstName = employee.name.first.toLowerCase();
-      let lastName = employee.name.last.toLowerCase();
-      return firstName === searched || lastName === searched;
-    });
-    this.setState({
-      newResults: newList,
-    });
+    if (searched === "") {
+      this.setState({
+        newResults: this.state.results,
+      });
+    } else {
+      let newList = directory.filter((employee) => {
+        let firstName = employee.name.first.toLowerCase();
+        let lastName = employee.name.last.toLowerCase();
+        return firstName === searched || lastName === searched;
+      });
+      this.setState({
+        newResults: newList,
+      });
+    }
   };
 
   // When the button is clicked, alphabetize the names

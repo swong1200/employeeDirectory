@@ -17,7 +17,7 @@ function SearchForm(props) {
               id="search"
             />
             <button onClick={props.handleSort} className="btn btn-primary mt-3">
-          Sort Last Name
+          Sort by Last Name
         </button>
           </div>
         </form>
