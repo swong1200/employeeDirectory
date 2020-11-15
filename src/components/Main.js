@@ -51,11 +51,15 @@ class Main extends Component {
     let directory = this.state.results;
     if (this.state.order === "descend") {
         let sortedList = directory.sort((a, b) => {
-            if (a.name.last > b.name.last)
-            return 1;
+            if (a.name.last < b.name.last)
+            return -1;
         });
-        console.log(sortedList)
-    }
+    this.setState({
+        newResults: sortedList,
+        order: "ascend"
+    })
+    console.log(this.state.order)
+    } 
   };
 
   render() {
