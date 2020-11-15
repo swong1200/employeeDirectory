@@ -9,7 +9,7 @@ class Main extends Component {
     search: "",
     results: [],
     newResults: [],
-    order: "descend"
+    order: "descend",
   };
 
   // When this component mounts, search the Random User API for employees
@@ -17,49 +17,60 @@ class Main extends Component {
     this.searchEmployees();
   }
 
-  searchEmployees = query => {
+  searchEmployees = (query) => {
     API.search(query)
-        // .then(res => console.log(res.data.results))
-      .then(res => this.setState({ results: res.data.results, newResults: res.data.results }))
-      .catch(err => console.log(err));
+      // .then(res => console.log(res.data.results))
+      .then((res) =>
+        this.setState({
+          results: res.data.results,
+          newResults: res.data.results,
+        })
+      )
+      .catch((err) => console.log(err));
   };
 
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
-      [name]: value
+      [name]: value,
     });
     let directory = this.state.results;
     // console.log(directory)
     let searched = String(this.state.search.trim().toLowerCase());
     // console.log(searched)
     let newList = directory.filter((employee) => {
-        let firstName = employee.name.first.toLowerCase();
-        let lastName = employee.name.last.toLowerCase();
-        return firstName === searched || lastName === searched;
-    })
+      let firstName = employee.name.first.toLowerCase();
+      let lastName = employee.name.last.toLowerCase();
+      return firstName === searched || lastName === searched;
+    });
     this.setState({
-        newResults: newList
-    })
+      newResults: newList,
+    });
   };
 
   // When the button is clicked, alphabetize the names
-  handleSort = event => {
+  handleSort = (event) => {
     event.preventDefault();
-    console.log(event)
+    console.log(event);
     let directory = this.state.results;
     if (this.state.order === "descend") {
-        let sortedList = directory.sort((a, b) => {
-            if (a.name.last < b.name.last)
-            return -1;
-        });
-    this.setState({
+      let sortedList = directory.sort((a, b) => {
+        if (a.name.last < b.name.last) return -1;
+      });
+      this.setState({
         newResults: sortedList,
-        order: "ascend"
-    })
-    console.log(this.state.order)
-    } 
+        order: "ascend",
+      });
+    } else if (this.state.order === "ascend") {
+      let sortedList = directory.sort((a, b) => {
+        if (a.name.last > b.name.last) return -1;
+      });
+      this.setState({
+        newResults: sortedList,
+        order: "descend",
+      });
+    }
   };
 
   render() {
