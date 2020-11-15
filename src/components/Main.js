@@ -8,7 +8,8 @@ class Main extends Component {
   state = {
     search: "",
     results: [],
-    newResults: []
+    newResults: [],
+    order: "descend"
   };
 
   // When this component mounts, search the Random User API for employees
@@ -30,9 +31,9 @@ class Main extends Component {
       [name]: value
     });
     let directory = this.state.results;
-    console.log(directory)
+    // console.log(directory)
     let searched = String(this.state.search.trim().toLowerCase());
-    console.log(searched)
+    // console.log(searched)
     let newList = directory.filter((employee) => {
         let firstName = employee.name.first.toLowerCase();
         let lastName = employee.name.last.toLowerCase();
@@ -43,10 +44,18 @@ class Main extends Component {
     })
   };
 
-  // When the arrow is clicked, alphabetize the names
+  // When the button is clicked, alphabetize the names
   handleSort = event => {
     event.preventDefault();
-    
+    console.log(event)
+    let directory = this.state.results;
+    if (this.state.order === "descend") {
+        let sortedList = directory.sort((a, b) => {
+            if (a.name.last > b.name.last)
+            return 1;
+        });
+        console.log(sortedList)
+    }
   };
 
   render() {
@@ -55,8 +64,9 @@ class Main extends Component {
         <SearchForm
           search={this.state.search}
           handleInputChange={this.handleInputChange}
+          handleSort={this.handleSort}
         />
-        <TableHeader handleSort={this.handleSort}/>
+        <TableHeader />
         <Results results={this.state.newResults} />
       </div>
     );

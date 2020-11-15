@@ -8,7 +8,7 @@ function TableHeader(props) {
               <h5>Image</h5>
             </div>
             <div className="col sm-2">
-              <h5>Name</h5><span onChange={props.handleSort} className="pointer">🔻</span>
+              <h5>Name</h5>
             </div>
             <div className="col sm-2">
               <h5>Phone Number</h5>
