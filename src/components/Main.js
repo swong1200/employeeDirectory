@@ -35,7 +35,8 @@ class Main extends Component {
     console.log(searched)
     let newList = directory.filter((employee) => {
         let firstName = employee.name.first.toLowerCase();
-        return firstName === searched;
+        let lastName = employee.name.last.toLowerCase();
+        return firstName === searched || lastName === searched;
     })
     this.setState({
         newResults: newList
